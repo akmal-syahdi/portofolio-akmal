@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Portofolio Akmal</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="spinner"></div>
+  </div>
+
+  <header>
+    <h1>Halo, saya Akmal</h1>
+    <button class="hamburger">☰</button>
+    <nav>
+      <a href="#about">Tentang saya</a>
+      <a href="#projects">Project</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Kontak</a>
+    </nav>
+    <p>Web Developer Pemula</p>
+    <button id="darkModeToggle">🌙 Dark Mode</button>
+  </header>
+
+  <section id="about" class="reveal">
+    <h2>Tentang Saya</h2>
+    <img src="images/foto.jpeg" alt="Foto Profil" class="foto">
+    <p>Saya sedang belajar HTML, CSS, dan JavaScript untuk membuat website sederhana.</p>
+  </section>
+
+  <section id="projects" class="reveal">
+    <h2>Project</h2>
+    <div class="project-list">
+      <div class="project-item" onclick="openModal('Kalkulator sederhana')">Kalkulator sederhana</div>
+      <div class="project-item" onclick="openModal('Website data diri')">Website data diri</div>
+      <div class="project-item" onclick="openModal('To-Do List')">To-Do List</div>
+    </div>
+  </section>
+
+  <section id="skills" class="reveal">
+    <h2>Skills</h2>
+    <ul class="skills-list">
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>VS Code</li>
+    </ul>
+  </section>
+
+  <section id="contact" class="reveal">
+    <h2>Kontak</h2>
+    <form id="contactForm" class="contact-form" autocomplete="on">
+      <label for="name">Nama:</label>
+      <input type="text" id="name" name="name" autocomplete="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" autocomplete="email" required>
+
+      <label for="message">Pesan:</label>
+      <textarea id="message" name="message" rows="4" autocomplete="off" required></textarea>
+
+      <button type="submit">Kirim</button>
+    </form>
+  </section>
+
+  <section id="education" class="reveal">
+    <h2>Pendidikan & Sertifikat</h2>
+    <ul>
+      <li>Belajar HTML & CSS – 2026</li>
+      <li>Workshop IoT dengan ESP32 – 2026</li>
+      <li>Pelatihan Dasar Elektronika – 2025</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Akmal</p>
+    <a href="#top" class="back-to-top">⬆ Kembali ke atas</a>
+  </footer>
+
+  <!-- Modal Gallery -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p id="modal-text"></p>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // alert sambutan
+      alert("Selamat datang di portofolio saya!");
+
+      // sembunyikan preloader
+      const preloader = document.getElementById("preloader");
+      if (preloader) preloader.classList.add("hidden");
+
+      // dark mode toggle
+      const toggleBtn = document.getElementById('darkModeToggle');
+      toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        toggleBtn.textContent = document.body.classList.contains('dark-mode') 
+          ? '☀️ Light Mode' 
+          : '🌙 Dark Mode';
+      });
+
+      // scroll reveal
+      window.addEventListener("scroll", () => {
+        document.querySelectorAll(".reveal").forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 50) {
+            el.classList.add("active");
+          }
+        });
+      });
+
+      // back-to-top smooth scroll
+      document.querySelector(".back-to-top").addEventListener("click", e => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // form validation
+      document.getElementById("contactForm").addEventListener("submit", e => {
+        e.preventDefault();
+        alert("Terima kasih, pesan Anda sudah terkirim!");
+      });
+
+      // modal close
+      const closeBtn = document.querySelector(".close");
+      closeBtn.addEventListener("click", () => {
+        document.getElementById("modal").style.display = "none";
+      });
+
+      // hamburger menu
+      const hamburger = document.querySelector(".hamburger");
+      const nav = document.querySelector("nav");
+      hamburger.addEventListener("click", () => {
+        nav.classList.toggle("active");
+      });
+    });
+
+    // modal open
+    function openModal(text) {
+      document.getElementById("modal-text").textContent = text;
+      document.getElementById("modal").style.display = "block";
+    }
+  </script>
+</body>
+</html>
